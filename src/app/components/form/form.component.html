@@ -1,0 +1,45 @@
+<ng-container *ngIf="active">
+
+    <section class="form">
+
+    <h2>{{texts?.title}}</h2>
+
+    <form name="form" [formGroup]="form" (submit)="handleSubmit()" >
+
+        <label 
+            *ngFor="let field of formFields"
+            [ngClass]="{checkbox: field.type === 'checkbox', incorrect: field.error}"
+        >
+
+            <span class="text">{{texts?.labels[field.name]}}</span>
+
+            <input *ngIf="field.type ==='checkbox'"  [type]="field.type" [id]="field.name" [name]="field.name" [formControlName]="field.name" (change)="handleCheckboxChange($event.target.name, $event.target.checked)" /> 
+            
+            <input *ngIf="field.type !== 'checkbox'"  [type]="field.type" [id]="field.name" [name]="field.name" [formControlName]="field.name" (focus)="handleFocus(field.name)" (focusout)="checkField(field.name)" /> 
+             
+            <span *ngIf="field.message.length > 0" class="message">* {{field.message}}</span>
+
+        </label>
+
+        <div class="bottom_bar">
+            <div>
+                {{texts?.toPay}} :
+                <strong>{{toPay | number:'1.2-2' }}</strong>
+                {{texts?.currency}}
+            </div>
+            <div>
+
+                <button (click)="switchSteps(2)">
+                    {{texts?.buttons?.back}}
+                </button>
+
+                <button class="button" type="submit">
+                    {{texts?.buttons?.send}}
+                </button>
+
+            </div>
+        </div>
+
+    </form>
+  </section >
+</ng-container>

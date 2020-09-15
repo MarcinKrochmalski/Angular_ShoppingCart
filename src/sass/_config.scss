@@ -1,0 +1,142 @@
+$colors_palette: (
+
+  "white": #fff,
+  "gray": #f1efef,
+  "dark_gray": #666,
+  "blue": #4595e0,
+  "red": #c91f1f
+
+);
+
+$window-widths: (
+
+  1: 1200px,
+  2: 800px
+
+);
+
+@function getColor($color, $adjust-hue: false) {
+
+  @if $adjust-hue {
+    @return adjust-hue(map-get($colors_palette, $color), $adjust-hue);
+  } @else {
+    @return map-get($colors_palette, $color);
+  }
+
+}
+
+@function getWindowWidth($width_number) {
+
+  @return map-get($window-widths, $width_number);
+
+}
+
+@mixin h2 {
+
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+
+}
+
+@mixin flexContener($direction, $justify, $aling) {
+
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: nowrap;
+  justify-content: $justify;
+  align-items: $aling;
+
+}
+
+@mixin section {
+
+  width: 800px;
+  height: auto;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: left;
+  background-color: getColor("white");
+  border-bottom: 1px solid getColor("gray");
+
+  @media (max-width: getWindowWidth(1)) {
+    width: 600px;
+  }
+  @media (max-width: getWindowWidth(2)) {
+    width: 400px;
+  }
+
+}
+
+@mixin input($width) {
+
+  width: $width;
+  margin: 0;
+  padding: 0.4rem;
+  font-size: 1rem;
+  border: 1px solid getColor("gray");
+  border-radius: 2px;
+  &:focus {
+    border: 1px solid getColor("dark_gray");
+  }
+  box-sizing: border-box;
+
+}
+
+@mixin button($font-size: 1rem) {
+
+  min-width: 2rem;
+  padding: 0.4rem;
+  margin: 0 0.1rem;
+  font-size: $font-size;
+  color: getColor("white");
+  text-align: center;
+  background-color: getColor("red");
+  border: 1px solid getColor("gray");
+  border-radius: 2px;
+  cursor: pointer;
+
+  &:hover {
+
+    background-color: getColor("red", 15deg);
+
+  }
+
+  &.active {
+
+    background-color: getColor("red", 15deg);
+
+    &:hover {
+
+      background-color: getColor("red");
+
+    }
+  }
+
+}
+
+@mixin bottom_bar {
+
+  @include flexContener(row, space-between, center);
+    width: 100%;
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+
+    div {
+        strong {
+
+        color: getColor("red");
+        font-weight: 600;
+
+        }
+    }
+
+    button,
+    input {
+
+        @include button(1rem);
+        
+    }
+  
+}
+

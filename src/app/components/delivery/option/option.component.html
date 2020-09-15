@@ -1,0 +1,14 @@
+<li (click)="select(optionData.id)" [class.select]="optionData.select" >
+    <div class="name">{{optionData.name}}</div>
+    <div class="price">
+        {{texts?.price}}: <strong>{{optionData.price | number:'1.2-2' }}</strong>
+        {{texts?.currency}}
+    </div>
+    <div class="options">
+        <button (click)="select(optionData.id)" >
+
+            {{texts?.buttons.select}}
+
+        </button>
+    </div>
+</li>

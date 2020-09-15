@@ -1,0 +1,32 @@
+<ng-container *ngIf="active">
+
+    <section class="list">
+        <h2>{{texts?.title}}</h2>
+        <ul>
+
+            <app-product 
+                *ngFor="let product of products" 
+                [texts]="texts" 
+                [productData]="product"
+                (ChangeEmitter)="change($event)" 
+                (ValidationEmitter)="validation($event)"
+                (DeleteEmitter)="delete($event)"
+                (PopupEmitter)="PopupEmitter.emit($event)"
+            ></app-product>
+
+        </ul>
+        <div class="bottom_bar">
+
+            <div>
+                {{texts?.listPrice}} :
+                <strong>{{listPrice | number:'1.2-2'}}</strong>
+                {{texts?.currency}}
+            </div>
+
+            <button class="active" (click)="switchSteps(2)">
+                {{texts?.buttons?.next}}
+            </button>
+        </div>
+    </section>
+
+</ng-container>

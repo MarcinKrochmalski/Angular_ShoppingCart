@@ -1,0 +1,8 @@
+<div class="popup" @openClose *ngIf="active" >
+    <div>
+
+        <p>{{message}}</p>
+        <button *ngIf="activeButton" (click)="close()">{{texts?.buttons?.close}}</button>
+        
+    </div>
+</div>
